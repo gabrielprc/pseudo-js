@@ -1,0 +1,47 @@
+{
+  "name": "pseudo-js",
+  "version": "0.0.1",
+  "description": "Pseudocode-to-Javascript compiler",
+  "main": "pseudo.js",
+  "scripts": {
+    "test": "./node_modules/.bin/jasmine-node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielprc/pseudo-js.git"
+  },
+  "keywords": [
+    "pseudocode",
+    "javascript",
+    "compiler"
+  ],
+  "author": "Gabriel Rodriguez Colombelli <gabrielpablorc@gmail.com> (https://github.com/gabrielprc)",
+  "contributors": [
+    {
+      "name": "Gabriel Rodriguez Colombelli",
+      "email": "gabrielpablorc@gmail.com",
+      "url": "https://github.com/gabrielprc"
+    },
+    {
+      "name": "Mariano Furriel",
+      "email": "",
+      "url": "https://github.com/marianfu"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabrielprc/pseudo-js/issues"
+  },
+  "homepage": "https://github.com/gabrielprc/pseudo-js#readme",
+  "dependencies": {
+    "escodegen": "^1.8.0"
+  },
+  "devDependencies": {
+    "pegjs": "^0.9.0",
+    "gulp": "^3.9.1",
+    "gulp-define-module": "^0.1.4",
+    "gulp-jasmine": "^2.4.0",
+    "gulp-pegjs": "0.0.1",
+    "jasmine-node": "^1.14.5"
+  }
+}
