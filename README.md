@@ -4,22 +4,30 @@
 
 ----
 # Definition
-First draft.
+First draft of a language definition built around some of the most common practices for writing pseudocode, and what we consider a more practical and human-readable syntax.
 
 ## Variables
-Variabes contain values. They are loosely typed (*[duck-typed](https://en.wikipedia.org/wiki/Duck_typing)*).
+Variabes are loosely typed (*[duck-typed](https://en.wikipedia.org/wiki/Duck_typing)*).
+
+### Declaration
+Variables are initially declared with the `var` keyword. At the declaration, an initial value may or may not be set. A variable only needs to be declared the first time it is referenced; declaring a variable with the same name of another previously declared will result in overriding the previous value of the same name variable.
+  - Explicitly setting value at time of declaration `var NUMBER is 2`
+  - Declaring variable with no initial value `var NUMBER`
+
+### Assignment
+The keyword for assigning a value to a variable is the verb `is`, which is equivalent to using the operator `=`. The variable to be assigned is the left-hand side operand, while the value to assign is on the right-side, with the assignment keyword between both. `NUMBER is 2`
 
 ### Values
   - Primitive (numeric, alphanumeric, boolean, void) `NUMBER = 1`
     - Booleans are `true` or `false`.
   - Object (key-value map) `HOUSE has DOOR = 1, HOUSE has WINDOW = 2`
   - Array `NUMBERS = [1, 2, 3]`
-  - Function `function SUM(NUMA, NUMB)`
+  - Function `SUM(NUMA, NUMB){...}`
 
 ## Statements
 Statements define conditions or loops for the execution of blocks.
 - Loops
-  - **for each _X_ in/of _Y_** `for each NUMBER in NUMBERS`
+  - **for each _X_ in _Y_** `for each NUMBER in NUMBERS`
   - **while _condition_** `while NUMBER < 10`
 - Conditionals
   - **if _condition_** `if NUMBER < 10`
@@ -28,16 +36,27 @@ Statements define conditions or loops for the execution of blocks.
 
 ### Conditions
 A condition used in a statement can be:
-- A _boolean_ defined variable.
-- A function that returns a _boolean_ value.
+- A _boolean_ value (directly as a value or as a variable).
+- A function that evaluates to a _boolean_ value.
 - A comparison operation.
 
 ## Blocks
 Blocks are lists of statements to be executed in a logical sequential order (top to bottom).
 
-Blocks are declared within curly brackets ( '**{**' and '**}**' ). `{ ... }` 
+Blocks are wrapped with curly brackets ( '**{**' and '**}**' ). `{ ... }` 
 
-Variables accessible within a block are those declared **within the same block** or **outside of it**. Variables defined inside of a lower level block (that is a block _within_ the current scoped block) **cannot** be accessed by it's containing block.
+Although not necessary, for the sake of readability we recommend to separate the brackets from the first and last lines of code with a line break, such as:
+
+    ... {
+       var NUMBER is 2
+    }
+    
+rather than
+
+    ... {var NUMBER is 2}
+
+### Scope
+Variables accessible within a block are those declared **within the same block** or **outside of it**. Variables defined inside of a lower level block (that is a block _within_ the current scoped block) **cannot** be accessed by it's parent block.
 ```
 ... {
     EXTNUMBER is 10
@@ -53,17 +72,20 @@ Variables accessible within a block are those declared **within the same block**
 
 ## Functions
 Functions are essentially named blocks, which may receive _parameters_ to be used as variables by the sencentes within said block.
-- Declaration
+
+### Declaration
   - Functions are to be named as any other variable, as they _are_ variables
   - The name of a function must precede the opening of a block `SUM { ... }`
   - Functions _can_ receive parameters, which are to be listed and named within parenthesis ( '**(**' and '**)**') _between_ the name of the function and the opening of the block `SUM(NUMA, NUMB) { ... }`
   - If not specified or empty, it will be considered that the function has no parameters. `SUM { ... }` _is equivalent to_ `SUM() { ... }`
-- Call
+
+### Invocation
   - A function is to be called by its name, followed by the parameters to pass to it between parenthesis (parameters will be passed to the function in the order defined at its declaration; parenthesis are to be used even if no parameters are passed)
   - Call with parameters: `SUM(A, B)`
   - Call without parameters: `SUM()`
   - Functions can be called without passing parameters even when it's declaration does define them. If one or more parameters are not passed, its values within the function's block will be **void**. `SUM()` _is equivalent to_ `SUM(void, void)`
-- Return
+
+### Return
   - All functions return a value on completing its execution. To explicitly define the return value of a function, it must contain a statement in the form of `return VALUE`, where value can be a variable, an operation, or a call to another function. If not explicitly declared, the return value of a function will be **void**.
   - The **return** statement ends the execution of the function, whether it is the last statement or not.
 
@@ -81,7 +103,7 @@ Operators perform operations between a left-hand side and a right-hand side oper
 
 ### Assignment
 - **is** (or '**=**')
-  - Basic value assignment operator. Assigns right-hand side value to the left-hand side variable. Using _is_ or '_=_' has no difference. `VAR is 10` _is equivalent to_ `VAR = 10`.
+  - Basic value assignment operator. Assigns right-hand side value to the left-hand side variable. Using _is_ or '_=_' has the same result. `NUM is 10` _is equivalent to_ `NUM = 10`.
 - **has**
   - _has_ defines the left-hand side variable as an **object**, and the right-hand side variable as a property of that object. In the sentence `HOUSE has DOORS = 2`, we are defining a variable `HOUSE` as an object, which has a property `DOORS`, to which we assign the value `2`. Shown as a key-value map: `HOUSE = {DOORS: 2}`.
 - **of** (or **in**)
@@ -112,7 +134,7 @@ Boolean operations take boolean values as operands and return another boolean va
 
 
 ## Misc
-- Indentation is irrelevant to the execution of the code.
+- Indentation is irrelevant to the execution of the code. We do recommend to increase indentation for sentences within a new block.
 - Lower and upper-case are indifferent. For the sake of readability, we recommend writing variable names in full upper-case, and the rest of the code (operators, statements) in lower-case.
 - All words and symbols defined in this draft as operators, statements, separators, etc., are reserved, and _cannot be used in variable names_.
 - The most external block (main thread of execution) carries no curly brackets, they are implicit.

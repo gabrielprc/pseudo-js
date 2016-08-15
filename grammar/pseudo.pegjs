@@ -436,28 +436,28 @@ Zs = [\u0020\u00A0\u1680\u2000-\u200A\u202F\u205F\u3000]
 
 /* Tokens */
 
-NewToken        = "new"                 !IdentifierPart
-NullToken       = "null"                !IdentifierPart
-SuperToken      = "super"               !IdentifierPart
-ThisToken       = "this"                !IdentifierPart
-EachToken       = "each"                !IdentifierPart
-ElseToken       = "sino"                !IdentifierPart
-EqualsToken     = "igual" / "=="        !IdentifierPart
-NotEqualsToken  = "distinto" / "!="     !IdentifierPart
-FalseToken      = "falso"               !IdentifierPart
-ForToken        = "por cada"            !IdentifierPart
-HasToken        = "tiene"               !IdentifierPart
-IfToken         = "si"                  !IdentifierPart
-IsToken         = "es" / "="            !IdentifierPart
-InToken         = "en" / "de"           !IdentifierPart
-NotToken        = "not"                 !IdentifierPart
-ReturnToken     = "devolver"            !IdentifierPart
-TrueToken       = "verdadero"           !IdentifierPart
-VarToken        = "var"                 !IdentifierPart
-WhileToken      = "mientras"            !IdentifierPart
-FunctionToken   = "metodo"              !IdentifierPart
-AndToken 		    = "&&" / "y"            !IdentifierPart 
-OrToken 		    = "||" / "o"            !IdentifierPart
+AndToken        = "and" / "y" / "&&"                 !IdentifierPart 
+EachToken       = "each" / "cada"                    !IdentifierPart
+ElseToken       = "sino" / "else"                    !IdentifierPart
+EqualsToken     = "equals" / "igual" / "=="          !IdentifierPart
+FalseToken      = "false" / "falso"                  !IdentifierPart
+ForToken        = "for" / "por"                      !IdentifierPart
+FunctionToken   = "function" / "metodo"              !IdentifierPart
+HasToken        = "has" / "tiene"                    !IdentifierPart
+IfToken         = "if" / "si"                        !IdentifierPart
+InToken         = "in" / "en" / "de"                 !IdentifierPart
+IsToken         = "is" / "es" / "="                  !IdentifierPart
+NewToken        = "new"                              !IdentifierPart
+NotEqualsToken  = "not equals" / "distinto" / "!="   !IdentifierPart
+NotToken        = "not" / "no"                       !IdentifierPart
+NullToken       = "null"                             !IdentifierPart
+OrToken         = "or" / "o" / "||"                  !IdentifierPart
+ReturnToken     = "return" / "devolver"              !IdentifierPart
+SuperToken      = "super"                            !IdentifierPart
+ThisToken       = "this"                             !IdentifierPart
+TrueToken       = "true" / "verdadero"               !IdentifierPart
+VarToken        = "var"                              !IdentifierPart
+WhileToken      = "while" / "mientras"               !IdentifierPart
 
 /* Skipped */
 
@@ -1013,70 +1013,14 @@ IterationStatement
   = WhileToken __ test:Expression __
     body:Statement
     { return { type: "WhileStatement", test: test, body: body }; }
-  / ForToken __
-    "(" __
-    init:(ExpressionNoIn __)? ";" __
-    test:(Expression __)? ";" __
-    update:(Expression __)?
-    ")" __
+  / ForToken __ EachToken __ each:Identifier __ InToken __ list:Identifier __
     body:Statement
     {
       return {
-        type:   "ForStatement",
-        init:   extractOptional(init, 0),
-        test:   extractOptional(test, 0),
-        update: extractOptional(update, 0),
+        type:   "ForEachStatement",
+        each:   each,
+        list:   list,
         body:   body
-      };
-    }
-  / ForToken __
-    VarToken __ declarations:VariableDeclarationListNoIn __ ";" __
-    test:(Expression __)? ";" __
-    update:(Expression __)?
-    body:Statement
-    {
-      return {
-        type:   "ForStatement",
-        init:   {
-          type:         "VariableDeclaration",
-          declarations: declarations
-        },
-        test:   extractOptional(test, 0),
-        update: extractOptional(update, 0),
-        body:   body
-      };
-    }
-  / ForToken __
-   "(" __
-    left:LeftHandSideExpression __
-    InToken __
-    right:Expression __
-    ")" __
-    body:Statement
-    {
-      return {
-        type:  "ForInStatement",
-        left:  left,
-        right: right,
-        body:  body
-      };
-    }
-  / ForToken __
-    "(" __
-    VarToken __ declarations:VariableDeclarationListNoIn __
-    InToken __
-    right:Expression __
-    ")" __
-    body:Statement
-    {
-      return {
-        type:  "ForInStatement",
-        left:  {
-          type:         "VariableDeclaration",
-          declarations: declarations
-        },
-        right: right,
-        body:  body
       };
     }
 
