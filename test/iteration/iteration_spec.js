@@ -1,4 +1,5 @@
 var pseudo = require('../../pseudo');
+var stringUtils = require('../../src/utils/string-utils');
 
 describe('Iteration', function () {
 
@@ -6,10 +7,16 @@ describe('Iteration', function () {
 
     it('should return \'for ...\' ', function () {
 
-        input = 'por cada(e en elementos){}'.replace(/\s+/g, '');
+        input = 'por cada(e en elementos){}';
         output = pseudo.parseToJS(input);
+        output = stringUtils.reduceMultipleWhitespaces(
+        	stringUtils.removeWhitespacesNotBetweenWords(output)
+        );
 
-        expected = 'for (e in elementos) {}'.replace(/\s+/g, '');
+        expected = 'for (e in elementos){}';
+        expected = stringUtils.reduceMultipleWhitespaces(
+        	stringUtils.removeWhitespacesNotBetweenWords(expected)
+        );
 
         expect(output).toEqual(expected);
     });

@@ -192,26 +192,9 @@ ReservedWord
   / BooleanLiteral
 
 Keyword
-  = BreakToken
-  / CaseToken
-  / CatchToken
-  / ContinueToken
-  / DebuggerToken
-  / DefaultToken
-  / DeleteToken
-  / DoToken
-  / FinallyToken
-  / FunctionToken
-  / InstanceofToken
+  = FunctionToken
   / NewToken
-  / SwitchToken
   / ThisToken
-  / ThrowToken
-  / TryToken
-  / TypeofToken
-  / VoidToken
-  / WithToken
-  
   / EachToken
   / ElseToken
   / EqualsToken
@@ -229,7 +212,6 @@ Keyword
   / AndToken
   / OrToken
   / NotEqualsToken
-  / WhileToken
 
 
 Literal
@@ -454,54 +436,28 @@ Zs = [\u0020\u00A0\u1680\u2000-\u200A\u202F\u205F\u3000]
 
 /* Tokens */
 
-BreakToken      = "break"      !IdentifierPart
-CaseToken       = "case"       !IdentifierPart
-CatchToken      = "catch"      !IdentifierPart
-ClassToken      = "class"      !IdentifierPart
-ConstToken      = "const"      !IdentifierPart
-ContinueToken   = "continue"   !IdentifierPart
-DebuggerToken   = "debugger"   !IdentifierPart
-DefaultToken    = "default"    !IdentifierPart
-DeleteToken     = "delete"     !IdentifierPart
-DoToken         = "do"         !IdentifierPart
-EnumToken       = "enum"       !IdentifierPart
-ExportToken     = "export"     !IdentifierPart
-ExtendsToken    = "extends"    !IdentifierPart
-FinallyToken    = "finally"    !IdentifierPart
-FunctionToken   = "function"   !IdentifierPart
-GetToken        = "get"        !IdentifierPart
-ImportToken     = "import"     !IdentifierPart
-InstanceofToken = "instanceof" !IdentifierPart
-NewToken        = "new"        !IdentifierPart
-NullToken       = "null"       !IdentifierPart
-SetToken        = "set"        !IdentifierPart
-SuperToken      = "super"      !IdentifierPart
-SwitchToken     = "switch"     !IdentifierPart
-ThisToken       = "this"       !IdentifierPart
-ThrowToken      = "throw"      !IdentifierPart
-TryToken        = "try"        !IdentifierPart
-TypeofToken     = "typeof"     !IdentifierPart
-WithToken       = "with"       !IdentifierPart
-
-EachToken       = "each"       !IdentifierPart
-ElseToken       = "sino"       !IdentifierPart
-EqualsToken     = "igual" / "=="!IdentifierPart
-NotEqualsToken  = "distinto" / "!="   !IdentifierPart
-FalseToken      = "falso"      !IdentifierPart
-ForToken        = "por cada"   !IdentifierPart
-HasToken        = "tiene"      !IdentifierPart
-IfToken         = "si"         !IdentifierPart
-IsToken         = "es" / "="   !IdentifierPart
-InToken         = "en" / "de"  !IdentifierPart
-NotToken        = "not"        !IdentifierPart
-ReturnToken     = "devolver"   !IdentifierPart
-TrueToken       = "verdadero" !IdentifierPart
-VarToken        = "var"        !IdentifierPart
-VoidToken       = "void"       !IdentifierPart
-WhileToken      = "mientras"   !IdentifierPart
-FunctionToken   = "metodo"     !IdentifierPart
-AndToken 		= "&&" / "y"   !IdentifierPart 
-OrToken 		= "||" / "o"  !IdentifierPart
+NewToken        = "new"                 !IdentifierPart
+NullToken       = "null"                !IdentifierPart
+SuperToken      = "super"               !IdentifierPart
+ThisToken       = "this"                !IdentifierPart
+EachToken       = "each"                !IdentifierPart
+ElseToken       = "sino"                !IdentifierPart
+EqualsToken     = "igual" / "=="        !IdentifierPart
+NotEqualsToken  = "distinto" / "!="     !IdentifierPart
+FalseToken      = "falso"               !IdentifierPart
+ForToken        = "por cada"            !IdentifierPart
+HasToken        = "tiene"               !IdentifierPart
+IfToken         = "si"                  !IdentifierPart
+IsToken         = "es" / "="            !IdentifierPart
+InToken         = "en" / "de"           !IdentifierPart
+NotToken        = "not"                 !IdentifierPart
+ReturnToken     = "devolver"            !IdentifierPart
+TrueToken       = "verdadero"           !IdentifierPart
+VarToken        = "var"                 !IdentifierPart
+WhileToken      = "mientras"            !IdentifierPart
+FunctionToken   = "metodo"              !IdentifierPart
+AndToken 		    = "&&" / "y"            !IdentifierPart 
+OrToken 		    = "||" / "o"            !IdentifierPart
 
 /* Skipped */
 
@@ -588,36 +544,6 @@ PropertyNameAndValueList
 PropertyAssignment
   = key:PropertyName __ ":" __ value:AssignmentExpression {
       return { key: key, value: value, kind: "init" };
-    }
-  / GetToken __ key:PropertyName __
-    "(" __ ")" __
-    "{" __ body:FunctionBody __ "}"
-    {
-      return {
-        key:   key,
-        value: {
-          type:   "FunctionExpression",
-          id:     null,
-          params: [],
-          body:   body
-        },
-        kind:  "get"
-      };
-    }
-  / SetToken __ key:PropertyName __
-    "(" __ params:PropertySetParameterList __ ")" __
-    "{" __ body:FunctionBody __ "}"
-    {
-      return {
-        key:   key,
-        value: {
-          type:   "FunctionExpression",
-          id:     null,
-          params: params,
-          body:   body
-        },
-        kind:  "set"
-      };
     }
 
 PropertyName
@@ -739,10 +665,7 @@ UnaryExpression
     }
 
 UnaryOperator
-  = $DeleteToken
-  / $VoidToken
-  / $TypeofToken
-  / "++"
+  = "++"
   / "--"
   / $("+" !"=")
   / $("-" !"=")
@@ -788,7 +711,6 @@ RelationalOperator
   / ">="
   / $("<" !"<")
   / $(">" !">")
-  / $InstanceofToken
   / $InToken
 
 RelationalExpressionNoIn
@@ -801,7 +723,6 @@ RelationalOperatorNoIn
   / ">="
   / $("<" !"<")
   / $(">" !">")
-  / $InstanceofToken
 
 EqualityExpression
   = head:RelationalExpression
@@ -999,7 +920,6 @@ Statement
   / IfStatement
   / IterationStatement
   / ReturnStatement
-  / SwitchStatement
 
 Block
   = "{" __ body:(StatementList __)? "}" {
@@ -1090,7 +1010,7 @@ IfStatement
     }
 
 IterationStatement
-  = WhileToken __ "(" __ test:Expression __ ")" __
+  = WhileToken __ test:Expression __
     body:Statement
     { return { type: "WhileStatement", test: test, body: body }; }
   / ForToken __
@@ -1169,51 +1089,6 @@ ReturnStatement
       return { type: "ReturnStatement", argument: argument };
     }
 
-SwitchStatement
-  = SwitchToken __ "(" __ discriminant:Expression __ ")" __
-    cases:CaseBlock
-    {
-      return {
-        type:         "SwitchStatement",
-        discriminant: discriminant,
-        cases:        cases
-      };
-    }
-
-CaseBlock
-  = "{" __ clauses:(CaseClauses __)? "}" {
-      return optionalList(extractOptional(clauses, 0));
-    }
-  / "{" __
-    before:(CaseClauses __)?
-    default_:DefaultClause __
-    after:(CaseClauses __)? "}"
-    {
-      return optionalList(extractOptional(before, 0))
-        .concat(default_)
-        .concat(optionalList(extractOptional(after, 0)));
-    }
-
-CaseClauses
-  = head:CaseClause tail:(__ CaseClause)* { return buildList(head, tail, 1); }
-
-CaseClause
-  = CaseToken __ test:Expression __ ":" consequent:(__ StatementList)? {
-      return {
-        type:       "SwitchCase",
-        test:       test,
-        consequent: optionalList(extractOptional(consequent, 1))
-      };
-    }
-
-DefaultClause
-  = DefaultToken __ ":" consequent:(__ StatementList)? {
-      return {
-        type:       "SwitchCase",
-        test:       null,
-        consequent: optionalList(extractOptional(consequent, 1))
-      };
-    }
 
 /* ----- A.5 Functions and Programs ----- */
 
