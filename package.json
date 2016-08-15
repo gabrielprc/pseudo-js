@@ -4,7 +4,8 @@
   "description": "Pseudocode-to-Javascript compiler",
   "main": "pseudo.js",
   "scripts": {
-    "test": "./node_modules/.bin/jasmine-node test"
+    "test": "jasmine-node test",
+    "cover": "istanbul cover -x '**/src/parser/**' jasmine-node test"
   },
   "repository": {
     "type": "git",
@@ -37,11 +38,13 @@
     "escodegen": "^1.8.0"
   },
   "devDependencies": {
-    "pegjs": "^0.9.0",
+    "codecov": "^1.0.1",
     "gulp": "^3.9.1",
     "gulp-define-module": "^0.1.4",
     "gulp-jasmine": "^2.4.0",
     "gulp-pegjs": "0.0.1",
-    "jasmine-node": "^1.14.5"
+    "istanbul": "^0.4.4",
+    "jasmine-node": "^1.14.5",
+    "pegjs": "^0.9.0"
   }
 }

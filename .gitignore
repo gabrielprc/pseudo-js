@@ -1,2 +1,4 @@
-node_modules
 .DS_Store
+test/.DS_Store
+node_modules
+coverage

@@ -5,6 +5,8 @@ node_js:
 
 before_script:
   - npm install -g gulp
+  - gulp compile
 
 script:
-  - gulp test
+  - npm run cover
+  - codecov
