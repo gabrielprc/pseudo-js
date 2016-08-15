@@ -20,6 +20,7 @@ The keyword for assigning a value to a variable is the verb `is`, which is equiv
 ### Values
   - Primitive (numeric, alphanumeric, boolean, void) `NUMBER = 1`
     - Booleans are `true` or `false`.
+    - Alphanumeric values (a.k.a. 'strings') are defined between single or double quotation marks, imitating the [usage of quotation marks in Javascript strings](http://www.w3schools.com/js/js_strings.asp).
   - Object (key-value map) `HOUSE has DOOR = 1, HOUSE has WINDOW = 2`
   - Array `NUMBERS = [1, 2, 3]`
   - Function `SUM(NUMA, NUMB){...}`

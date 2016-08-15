@@ -1013,17 +1013,16 @@ IterationStatement
   = WhileToken __ test:Expression __
     body:Statement
     { return { type: "WhileStatement", test: test, body: body }; }
-  / ForToken __ EachToken __ each:Identifier __ InToken __ list:Identifier __
+  / ForToken __ EachToken __ left:LeftHandSideExpression __ InToken __ right:Expression __
     body:Statement
     {
       return {
-        type:   "ForEachStatement",
-        each:   each,
-        list:   list,
-        body:   body
+        type:  "ForInStatement",
+        left:  left,
+        right: right,
+        body:  body
       };
     }
-
 
 ReturnStatement
   = ReturnToken EOS {

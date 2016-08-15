@@ -5,6 +5,10 @@ var utils = {
 
 	reduceMultipleWhitespaces: function(string) {
 		return string.replace(/\s+/g, ' ');
+	},
+
+	removeWhitespacesForJs: function(string) {
+		return this.removeWhitespacesNotBetweenWords(this.reduceMultipleWhitespaces(string));
 	}
 }
 

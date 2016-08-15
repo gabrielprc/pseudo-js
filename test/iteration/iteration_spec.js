@@ -7,16 +7,12 @@ describe('Iteration', function () {
 
     it('should return \'for ...\' ', function () {
 
-        input = 'por cada(e en elementos){}';
+        input = 'por cada e en elementos {}';
         output = pseudo.parseToJS(input);
-        output = stringUtils.reduceMultipleWhitespaces(
-        	stringUtils.removeWhitespacesNotBetweenWords(output)
-        );
+        output = stringUtils.removeWhitespacesForJs(output);
 
         expected = 'for (e in elementos){}';
-        expected = stringUtils.reduceMultipleWhitespaces(
-        	stringUtils.removeWhitespacesNotBetweenWords(expected)
-        );
+        expected = stringUtils.removeWhitespacesForJs(expected);
 
         expect(output).toEqual(expected);
     });
