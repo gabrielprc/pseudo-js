@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/gabrielprc/pseudo-js.svg?branch=master)](https://travis-ci.org/gabrielprc/pseudo-js)
+[![codecov](https://codecov.io/gh/gabrielprc/pseudo-js/branch/master/graph/badge.svg)](https://codecov.io/gh/gabrielprc/pseudo-js)
+
+
 # pseudo.js
 ### A pseudocode-to-Javascript compiler
 ##### by [marianfu](https://github.com/marianfu) and [gabrielprc](https://github.com/gabrielprc)
