@@ -9,6 +9,11 @@ var utils = {
 
 	removeWhitespacesForJs: function(string) {
 		return this.removeWhitespacesNotBetweenWords(this.reduceMultipleWhitespaces(string));
+	},
+
+	test: function() {
+		// This is just a test method
+		var a = 1;
 	}
 }
 
