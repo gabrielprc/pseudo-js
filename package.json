@@ -5,7 +5,8 @@
   "main": "pseudo.js",
   "scripts": {
     "test": "jasmine-node test",
-    "cover": "istanbul cover -x '**/src/parser/**' jasmine-node test"
+    "cover": "istanbul cover jasmine-node test",
+    "doc": "jsdoc -c documentation.json -r"
   },
   "repository": {
     "type": "git",
@@ -41,7 +42,9 @@
     "codecov": "^1.0.1",
     "gulp": "^3.9.1",
     "gulp-define-module": "^0.1.4",
+    "gulp-istanbul": "^1.1.0",
     "gulp-jasmine": "^2.4.0",
+    "gulp-jsdoc3": "^0.3.0",
     "gulp-pegjs": "0.0.1",
     "istanbul": "^0.4.4",
     "jasmine-node": "^1.14.5",
