@@ -4,9 +4,11 @@ describe('Variable declaration', function () {
 
 	var input, output, expected;
 
+
+
     it('should return \'var a = 1\' ', function () {
 
-        input = 'var a es 1';
+        input = 'var a = 1';
         output = pseudo.parseToJS(input);
 
         expected = 'var a = 1;';
