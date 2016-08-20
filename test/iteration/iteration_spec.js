@@ -11,9 +11,22 @@ describe('Iteration', function () {
         output = pseudo.parseToJS(input);
         output = stringUtils.removeWhitespacesForJs(output);
 
-        expected = 'for (e in elementos){}';
+        expected = 'for (e in elementos) {}';
         expected = stringUtils.removeWhitespacesForJs(expected);
 
         expect(output).toEqual(expected);
     });
+
+    it('should return \'while ...\' ', function () {
+
+        input = 'mientras alumnos igual 10 {}';
+        output = pseudo.parseToJS(input);
+        output = stringUtils.removeWhitespacesForJs(output);
+
+        expected = 'while (alumnos == 10) {}';
+        expected = stringUtils.removeWhitespacesForJs(expected);
+
+        expect(output).toEqual(expected);
+    });
+
 });
