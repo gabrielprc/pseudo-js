@@ -193,7 +193,6 @@ ReservedWord
 
 Keyword
   = FunctionToken
-  / NewToken
   / ThisToken
   / EachToken
   / ElseToken
@@ -447,7 +446,6 @@ HasToken        = "has" / "tiene"                    !IdentifierPart
 IfToken         = "if" / "si"                        !IdentifierPart
 InToken         = "in" / "en" / "de"                 !IdentifierPart
 IsToken         = "is" / "es" / "="                  !IdentifierPart
-NewToken        = "new"                              !IdentifierPart
 NotEqualsToken  = "not equals" / "distinto" / "!="   !IdentifierPart
 NotToken        = "not" / "no"                       !IdentifierPart
 NullToken       = "null"                             !IdentifierPart
@@ -558,9 +556,6 @@ MemberExpression
   = head:(
         PrimaryExpression
       / FunctionExpression
-      / NewToken __ callee:MemberExpression __ args:Arguments {
-          return { type: "NewExpression", callee: callee, arguments: args };
-        }
     )
     tail:(
         __ "[" __ property:Expression __ "]" {
@@ -583,9 +578,6 @@ MemberExpression
 
 NewExpression
   = MemberExpression
-  / NewToken __ callee:NewExpression {
-      return { type: "NewExpression", callee: callee, arguments: [] };
-    }
 
 CallExpression
   = head:(
