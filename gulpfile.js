@@ -19,7 +19,7 @@ gulp.task('doc', function (cb) {
 });
 
 gulp.task('pre-test', ['compile'], function () {
-  return gulp.src(['pseudo.js', 'src/**/*.js', '!src/parser/*.js'])
+  return gulp.src(['pseudo.js', 'src/**/*.js'])
     .pipe(istanbul())
     .pipe(istanbul.hookRequire());
 });
