@@ -176,4 +176,15 @@ describe('Variable assignment', function () {
         
         expect(output).toEqual(expected);
     });
+
+    //  Function assignment
+
+    it('should return "a = function fun() {}" ', function () {
+
+        input = 'a es fun {}';
+        output = pseudo.parseToJS(input);
+        expected = 'a = function fun() {};';
+        
+        expect(output).toEqual(expected);
+    });
 });

@@ -29,4 +29,16 @@ describe('Iteration', function () {
         expect(output).toEqual(expected);
     });
 
+    it('should return \'while ...\' ', function () {
+
+        input = 'while alumnos == 10 {}';
+        output = pseudo.parseToJS(input);
+        output = stringUtils.removeWhitespacesForJs(output);
+
+        expected = 'while (alumnos == 10) {}';
+        expected = stringUtils.removeWhitespacesForJs(expected);
+
+        expect(output).toEqual(expected);
+    });
+
 });

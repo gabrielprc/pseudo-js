@@ -1039,16 +1039,36 @@ FunctionDeclaration
         body:   body
       };
     }
+  / FunctionToken? __ id:Identifier __
+    "{" __ body:FunctionBody __ "}"
+    {
+      return {
+        type:   "FunctionDeclaration",
+        id:     id,
+        params: [],
+        body:   body
+      };
+    }  
 
 FunctionExpression
-  = __ FunctionToken __ id:Identifier
-     __ params:(FormalParameterList __)? __
-    __ body:Block __
+  = __ FunctionToken? __ id:Identifier __
+     "(" __ params:(FormalParameterList __)? ")" __
+    "{" __ body:FunctionBody __ "}"
     {
       return {
         type:   "FunctionExpression",
         id:     extractOptional(id, 0),
         params: optionalList(extractOptional(params, 0)),
+        body:   body
+      };
+    }
+  / __ FunctionToken? __ id:Identifier __
+    "{" __ body:FunctionBody __ "}"
+    {
+      return {
+        type:   "FunctionExpression",
+        id:     extractOptional(id, 0),
+        params: [],
         body:   body
       };
     }
