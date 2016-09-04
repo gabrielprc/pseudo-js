@@ -561,7 +561,7 @@ MemberExpression
         __ "[" __ property:Expression __ "]" {
           return { property: property, computed: true };
         }
-      / __ "." __ property:IdentifierName {
+      / __ HasToken __ property:IdentifierName {
           return { property: property, computed: false };
         }
     )*
@@ -596,14 +596,30 @@ CallExpression
             computed: true
           };
         }
-      / __ "." __ property:IdentifierName {
-          return {
-            type:     "MemberExpression",
-            property: property,
-            computed: false
-          };
-        }
     )*
+    {
+      return buildTree(head, tail, function(result, element) {
+        element[TYPES_TO_PROPERTY_NAMES[element.type]] = result;
+
+        return element;
+      });
+    }
+
+ObjectCallExpression
+  = head:(
+      property:IdentifierName {
+        return {
+          type:     "MemberExpression",
+          property: property,
+          computed: false
+        };
+      }
+    )
+    tail:(
+      __ InToken __ callee:MemberExpression __ args:Arguments {
+        return { type: "CallExpression", callee: callee, arguments: args };
+      }
+    )
     {
       return buildTree(head, tail, function(result, element) {
         element[TYPES_TO_PROPERTY_NAMES[element.type]] = result;
@@ -624,6 +640,7 @@ ArgumentList
 
 LeftHandSideExpression
   = CallExpression
+  / ObjectCallExpression
   / NewExpression
 
 PostfixExpression

@@ -179,12 +179,12 @@ describe('Variable assignment', function () {
 
     //  Function assignment
 
-    it('should return "a = function fun() {}" ', function () {
+    // it('should return "a = function fun() {}" ', function () {
 
-        input = 'a es fun {}';
-        output = pseudo.parseToJS(input);
-        expected = 'a = function fun() {};';
+    //     input = 'a es fun {}';
+    //     output = pseudo.parseToJS(input);
+    //     expected = 'a = function fun() {};';
         
-        expect(output).toEqual(expected);
-    });
+    //     expect(output).toEqual(expected);
+    // });
 });
