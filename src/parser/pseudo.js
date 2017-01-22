@@ -401,6 +401,11 @@ module.exports = (function() {
                 ? "UpdateExpression"
                 : "UnaryExpression";
 
+              operator = operator.toLowerCase();
+              if (operator == "not" || operator == "no") {
+                operator = "!";
+              }
+
               return {
                 type:     type,
                 operator: operator,
@@ -5881,6 +5886,9 @@ module.exports = (function() {
                 } else {
                   s0 = peg$FAILED;
                   if (peg$silentFails === 0) { peg$fail(peg$c280); }
+                }
+                if (s0 === peg$FAILED) {
+                  s0 = peg$parseNotToken();
                 }
               }
             }
