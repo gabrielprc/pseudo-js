@@ -665,6 +665,11 @@ UnaryExpression
         ? "UpdateExpression"
         : "UnaryExpression";
 
+      operator = operator.toLowerCase();
+      if (operator == "not" || operator == "no") {
+        operator = "!";
+      }
+
       return {
         type:     type,
         operator: operator,
@@ -680,6 +685,7 @@ UnaryOperator
   / $("-" !"=")
   / "~"
   / "!"
+  / NotToken
 
 MultiplicativeExpression
   = head:UnaryExpression
