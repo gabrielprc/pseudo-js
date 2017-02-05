@@ -5,7 +5,7 @@ var escodegen = require('escodegen');
  * Pseudocode-to-Javascript compiler.
  * @exports pseudo-js
  */
-var pseudoParser = {
+var pseudo = {
 	/**
 	 * Returns the Javascript-compatible abstract syntax tree
 	 * for the given pseudocode.
@@ -13,14 +13,14 @@ var pseudoParser = {
 	 *
 	 * @param {string} string - String to copy.
 	 */
-	parseToSyntaxTree: function(parsable) {
+	compileToSyntaxTree: function(parsable) {
 		return parser.parse(parsable);
 	},
 
-	parseToJS: function(parsable) {
-		var syntaxTree = this.parseToSyntaxTree(parsable);
+	compileToJS: function(parsable) {
+		var syntaxTree = this.compileToSyntaxTree(parsable);
 		return escodegen.generate(syntaxTree);
 	}
 };
 
-module.exports = pseudoParser;
+module.exports = pseudo;
