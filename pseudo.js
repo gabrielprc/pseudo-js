@@ -1,5 +1,6 @@
 var parser = require('./src/parser/pseudo.js');
 var escodegen = require('escodegen');
+var argv = require('minimist')(process.argv.slice(2));
 
 /**
  * Pseudocode-to-Javascript compiler.
@@ -22,5 +23,9 @@ var pseudo = {
 		return escodegen.generate(syntaxTree);
 	}
 };
+
+if (!!argv.t) {
+	console.log(pseudo.compileToJS(argv.t));
+}
 
 module.exports = pseudo;

@@ -36,7 +36,8 @@
   },
   "homepage": "https://github.com/gabrielprc/pseudo-js#readme",
   "dependencies": {
-    "escodegen": "^1.8.0"
+    "escodegen": "^1.8.0",
+    "minimist": "^1.2.0"
   },
   "devDependencies": {
     "codecov": "^1.0.1",
