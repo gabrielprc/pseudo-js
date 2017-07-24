@@ -1,6 +1,7 @@
 var parser = require('./src/parser/pseudo.js');
 var escodegen = require('escodegen');
 var argv = require('minimist')(process.argv.slice(2));
+var printSteps = process && process.env.NODE_ENV === "development";
 
 /**
  * Pseudocode-to-Javascript compiler.
@@ -26,6 +27,19 @@ var pseudo = {
 
 if (!!argv.t) {
 	console.log(pseudo.compileToJS(argv.t));
+}
+
+if (printSteps) {
+	var fs = require("fs");
+	fs.readFile("input.txt", "utf8", function(err, data) {
+		if (err) throw err;
+		var code = pseudo.compileToJS(data);
+		fs.writeFile("output.txt", code, function(err) {
+		    if(err) {
+		        return console.log(err);
+		    }
+		});
+	});
 }
 
 module.exports = pseudo;
