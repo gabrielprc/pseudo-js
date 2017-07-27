@@ -7,7 +7,8 @@
     "start": "gulp compile && NODE_ENV=development node pseudo.js",
     "test": "jasmine-node test",
     "cover": "istanbul cover jasmine-node test",
-    "doc": "jsdoc -c documentation.json -r"
+    "doc": "jsdoc -c documentation.json -r",
+    "debug": "NODE_ENV=development node --inspect --debug-brk pseudo.js"
   },
   "repository": {
     "type": "git",

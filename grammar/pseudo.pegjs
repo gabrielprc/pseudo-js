@@ -1028,7 +1028,7 @@ IterationStatement
   = WhileToken __ test:Expression __
     body:Statement
     { return { type: "WhileStatement", test: test, body: body }; }
-  / ForToken __ EachToken __ left:LeftHandSideExpression __ InToken __ right:Expression __
+  / ForToken __ EachToken __ left:LeftHandSideExpression __ InToken __ right:LeftHandSideExpression __
     body:Statement
     {
       return {

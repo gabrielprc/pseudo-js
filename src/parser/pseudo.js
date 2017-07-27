@@ -9418,7 +9418,7 @@ module.exports = (function() {
                     if (s7 !== peg$FAILED) {
                       s8 = peg$parse__();
                       if (s8 !== peg$FAILED) {
-                        s9 = peg$parseExpression();
+                        s9 = peg$parseLeftHandSideExpression();
                         if (s9 !== peg$FAILED) {
                           s10 = peg$parse__();
                           if (s10 !== peg$FAILED) {
