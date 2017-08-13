@@ -29,15 +29,18 @@ if (!!argv.t) {
 	console.log(pseudo.compileToJS(argv.t));
 }
 
-if (printSteps) {
+if (true) {
+	console.log("Leyendo el pseudocódigo desde input.txt...\n...\n...");
 	var fs = require("fs");
 	fs.readFile("input.txt", "utf8", function(err, data) {
 		if (err) throw err;
+		console.log("Procesando el pseudocódigo...\n...\n...");
 		var code = pseudo.compileToJS(data);
 		fs.writeFile("output.txt", code, function(err) {
 		    if(err) {
 		        return console.log(err);
 		    }
+		    console.log("Proceso completo! Los resultados se guardaron en output.txt");
 		});
 	});
 }
