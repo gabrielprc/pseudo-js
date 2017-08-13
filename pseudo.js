@@ -29,7 +29,7 @@ if (!!argv.t) {
 	console.log(pseudo.compileToJS(argv.t));
 }
 
-if (true) {
+if (printSteps) {
 	console.log("Leyendo el pseudocódigo desde input.txt...\n...\n...");
 	var fs = require("fs");
 	fs.readFile("input.txt", "utf8", function(err, data) {

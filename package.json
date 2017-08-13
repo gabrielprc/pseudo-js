@@ -1,6 +1,6 @@
 {
   "name": "pseudo-js",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Pseudocode-to-Javascript compiler",
   "main": "pseudo.js",
   "scripts": {
