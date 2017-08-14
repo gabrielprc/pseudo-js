@@ -145,7 +145,7 @@ SingleLineComment
   = "//" (!LineTerminator SourceCharacter)*
 
 Identifier
-  = !ReservedWord name:IdentifierName { return name; }
+  = name:IdentifierName { return name; }
 
 IdentifierName "identifier"
   = head:IdentifierStart tail:IdentifierPart* {
