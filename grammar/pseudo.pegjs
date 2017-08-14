@@ -435,27 +435,27 @@ Zs = [\u0020\u00A0\u1680\u2000-\u200A\u202F\u205F\u3000]
 
 /* Tokens */
 
-AndToken        = "and" / "y" / "&&"                 !IdentifierPart 
-EachToken       = "each" / "cada"                    !IdentifierPart
-ElseToken       = "sino" / "else"                    !IdentifierPart
-EqualsToken     = "equals" / "igual" / "=="          !IdentifierPart
-FalseToken      = "false" / "falso"                  !IdentifierPart
-ForToken        = "for" / "por"                      !IdentifierPart
-FunctionToken   = "function" / "metodo"              !IdentifierPart
-HasToken        = "has" / "tiene"                    !IdentifierPart
-IfToken         = "if" / "si"                        !IdentifierPart
-InToken         = "in" / "en" / "de"                 !IdentifierPart
-IsToken         = "is" / "es" / "="                  !IdentifierPart
-NotEqualsToken  = "not equals" / "distinto" / "!="   !IdentifierPart
-NotToken        = "not" / "no"                       !IdentifierPart
-NullToken       = "null"                             !IdentifierPart
-OrToken         = "or" / "o" / "||"                  !IdentifierPart
-ReturnToken     = "return" / "devolver"              !IdentifierPart
-SuperToken      = "super"                            !IdentifierPart
-ThisToken       = "this"                             !IdentifierPart
-TrueToken       = "true" / "verdadero"               !IdentifierPart
-VarToken        = "var"                              !IdentifierPart
-WhileToken      = "while" / "mientras"               !IdentifierPart
+AndToken        = "and"i / "y"i / "&&"                 !IdentifierPart 
+EachToken       = "each"i / "cada"i                    !IdentifierPart
+ElseToken       = "sino"i / "else"i                    !IdentifierPart
+EqualsToken     = "equals"i / "igual"i / "=="          !IdentifierPart
+FalseToken      = "false"i / "falso"i                  !IdentifierPart
+ForToken        = "for"i / "por"i                      !IdentifierPart
+FunctionToken   = "function"i / "metodo"i              !IdentifierPart
+HasToken        = "has"i / "tiene"i                    !IdentifierPart
+IfToken         = "if"i / "si"i                        !IdentifierPart
+InToken         = "in"i / "en"i / "de"i                !IdentifierPart
+IsToken         = "is"i / "es"i / "="                  !IdentifierPart
+NotEqualsToken  = "not equals"i / "distinto"i / "!="   !IdentifierPart
+NotToken        = "not"i / "no"i                       !IdentifierPart
+NullToken       = "null"i                              !IdentifierPart
+OrToken         = "or"i / "o"i / "||"                  !IdentifierPart
+ReturnToken     = "return"i / "devolver"i              !IdentifierPart
+SuperToken      = "super"i                             !IdentifierPart
+ThisToken       = "this"i                              !IdentifierPart
+TrueToken       = "true"i / "verdadero"i               !IdentifierPart
+VarToken        = "var"i                               !IdentifierPart
+WhileToken      = "while"i / "mientras"i               !IdentifierPart
 
 /* Skipped */
 
