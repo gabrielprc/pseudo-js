@@ -1,4 +1,5 @@
 var parser = require('./src/parser/pseudo.js');
+var functionUtils = require('./src/utils/function-utils.js');
 var escodegen = require('escodegen');
 var argv = require('minimist')(process.argv.slice(2));
 var printSteps = process && process.env.NODE_ENV === "development";
@@ -19,9 +20,17 @@ var pseudo = {
 		return parser.parse(parsable);
 	},
 
-	compileToJS: function(parsable) {
+	compileToJS: function(parsable, replaceFunctions) {
 		var syntaxTree = this.compileToSyntaxTree(parsable);
-		return escodegen.generate(syntaxTree);
+		var code = escodegen.generate(syntaxTree);
+
+		if (replaceFunctions) {
+			for (var i = 0; i < replaceFunctions.length; i++) {
+				code = functionUtils.replaceFunction(code, replaceFunctions[i].fun, replaceFunctions[i].replacement);
+			}
+		}
+
+		return code;
 	}
 };
 
@@ -35,7 +44,16 @@ if (printSteps) {
 	fs.readFile("input.txt", "utf8", function(err, data) {
 		if (err) throw err;
 		console.log("Procesando el pseudocódigo...\n...\n...");
-		var code = pseudo.compileToJS(data);
+
+		var replacements = [
+			{
+				fun: 'mostrar',
+				replacement: 'console.log'
+			}
+		];
+
+		var code = pseudo.compileToJS(data, replacements);
+
 		fs.writeFile("output.txt", code, function(err) {
 		    if(err) {
 		        return console.log(err);
