@@ -54,6 +54,8 @@ if (printSteps) {
 
 		var code = pseudo.compileToJS(data, replacements);
 
+		console.log(code);
+
 		fs.writeFile("output.txt", code, function(err) {
 		    if(err) {
 		        return console.log(err);

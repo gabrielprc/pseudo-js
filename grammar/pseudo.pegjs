@@ -440,7 +440,7 @@ EachToken       = "each"i / "cada"i                    !IdentifierPart
 ElseToken       = "sino"i / "else"i                    !IdentifierPart
 EqualsToken     = "equals"i / "igual"i / "=="          !IdentifierPart
 FalseToken      = "false"i / "falso"i                  !IdentifierPart
-ForToken        = "for"i / "por"i                      !IdentifierPart
+ForToken        = "for"i / "por"i / "para"i            !IdentifierPart
 FunctionToken   = "function"i / "metodo"i              !IdentifierPart
 HasToken        = "has"i / "tiene"i                    !IdentifierPart
 IfToken         = "if"i / "si"i                        !IdentifierPart
@@ -1032,11 +1032,32 @@ IterationStatement
     body:Statement
     {
       return {
-        type:  "ForInStatement",
-        left:  left,
-        right: right,
-        body:  body
-      };
+        "type": "ExpressionStatement",
+        "expression": {
+          "type": "CallExpression",
+          "callee": {
+            "type": "MemberExpression",
+            "computed": false,
+            "object": right,
+            "property": {
+              "type": "Identifier",
+              "name": "forEach"
+            }
+          },
+          "arguments": [
+            {
+              "type": "FunctionExpression",
+              "id": null,
+              "params": [
+                left
+              ],
+              "body": body,
+              "generator": false,
+              "expression": false
+            }
+          ]
+        }
+      }
     }
 
 ReturnStatement
